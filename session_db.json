@@ -1,0 +1,29 @@
+{
+  "sessions": [
+    {
+      "id": "1984811297:1984811297",
+      "data": {
+        "__scenes": {}
+      }
+    },
+    {
+      "id": "496437482:496437482",
+      "data": {
+        "__scenes": {},
+        "createEventInfo": {
+          "step": "endTime",
+          "winners": "3",
+          "subscriptions": "@upwork_relocate",
+          "endTime": null,
+          "description": "Какой-то ивент чисто для проверки"
+        }
+      }
+    },
+    {
+      "id": "1642080545:1642080545",
+      "data": {
+        "__scenes": {}
+      }
+    }
+  ]
+}
