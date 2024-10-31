@@ -12,5 +12,5 @@ export class User {
   lastName: string | null;
 
   @Column({ nullable: true, default: null })
-  nickname: string;
+  username: string;
 }

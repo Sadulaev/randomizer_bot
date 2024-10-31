@@ -7,22 +7,22 @@
       }
     },
     {
+      "id": "1642080545:1642080545",
+      "data": {
+        "__scenes": {}
+      }
+    },
+    {
       "id": "496437482:496437482",
       "data": {
         "__scenes": {},
         "createEventInfo": {
-          "step": "endTime",
-          "winners": "3",
-          "subscriptions": "@upwork_relocate",
+          "step": "subscriptions",
+          "winners": "5",
+          "subscriptions": "@archer_club",
           "endTime": null,
-          "description": "Какой-то ивент чисто для проверки"
+          "description": "123"
         }
-      }
-    },
-    {
-      "id": "1642080545:1642080545",
-      "data": {
-        "__scenes": {}
       }
     }
   ]

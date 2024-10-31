@@ -1,4 +1,4 @@
-import { EventStatus } from 'src/types/event.types';
+import { EventStatus } from 'src/enums/event.enum';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -6,7 +6,7 @@ export class Event {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ default: 'active' })
+  @Column({ default: EventStatus.InProgress })
   status: EventStatus;
 
   @Column({ nullable: true, default: null })
