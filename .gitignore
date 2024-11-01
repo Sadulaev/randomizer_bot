@@ -3,7 +3,7 @@
 /node_modules
 /build
 
-.session_db.json
+session_db.json
 
 # Logs
 logs
