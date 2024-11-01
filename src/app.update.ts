@@ -33,10 +33,12 @@ export class AppUpdate {
       if (!userFromDB) {
         const newUser = new User();
 
-        newUser.id = ctx.message.chat.id;
-        newUser.firstName = ctx.update.message.chat.first_name;
-        newUser.lastName = ctx.update.message.chat.last_name;
-        newUser.username = ctx.update.message.chat.username;
+        newUser.id = ctx.update.message.from.id;
+        newUser.firstName = ctx.update.message.from.first_name;
+        newUser.lastName = ctx.update.message.from.last_name;
+        newUser.username = ctx.update.message.from.username;
+
+        console.log(newUser)
 
         await this.userRepository.save(newUser);
       }

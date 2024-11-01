@@ -1,5 +1,6 @@
 import { EventStatus } from 'src/enums/event.enum';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/user/user.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 
 @Entity()
 export class Event {
@@ -23,4 +24,7 @@ export class Event {
 
   @Column({type: 'date', nullable: true})
   endtime: string | null;
+
+  @ManyToMany(() => User, (user) => user.events)
+  users: User[];
 }

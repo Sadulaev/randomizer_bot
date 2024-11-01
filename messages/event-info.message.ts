@@ -10,6 +10,10 @@ export default (event: Event) => {
 
     <em>Количество победителей</em> - <b>${event.winners}</b>
 
+    <em>Текущее количество участников</em> - <b>${event.users.length}</b>
+
+    <em>Подписка на канал</em> - <b>${event.subscriptions}</b>
+
     <em>Статус</em> - <b>${event.status}</b>
     `
 } 

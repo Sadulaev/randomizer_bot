@@ -8,6 +8,7 @@ import { User } from './user/user.entity';
 import { AppUpdate } from './app.update';
 import { Event } from './event/event.entity';
 import { AdminModule } from './admin/admin.module';
+import { UserModule } from './user/user.module';
 
 const sessions = new LocalSession({ database: 'session_db.json' });
 
@@ -31,7 +32,8 @@ const sessions = new LocalSession({ database: 'session_db.json' });
       synchronize: true,
     }),
     TypeOrmModule.forFeature([Event, User]),
-    AdminModule
+    AdminModule,
+    UserModule
   ],
   providers: [AppUpdate]
 })

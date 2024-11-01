@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Event } from 'src/event/event.entity';
+import { Entity, Column, PrimaryColumn, ManyToMany, JoinTable } from 'typeorm';
 
-@Entity()
+@Entity({name: 'participants'})
 export class User {
   @PrimaryColumn()
   id: number;
@@ -13,4 +14,8 @@ export class User {
 
   @Column({ nullable: true, default: null })
   username: string;
+
+  @ManyToMany(() => Event, (event) => event.users)
+  @JoinTable()
+  events: Event[];
 }

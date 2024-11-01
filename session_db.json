@@ -7,6 +7,18 @@
       }
     },
     {
+      "id": "-4545050337:496437482",
+      "data": {
+        "__scenes": {}
+      }
+    },
+    {
+      "id": "-1002391415562:496437482",
+      "data": {
+        "__scenes": {}
+      }
+    },
+    {
       "id": "1642080545:1642080545",
       "data": {
         "__scenes": {}
@@ -15,14 +27,7 @@
     {
       "id": "496437482:496437482",
       "data": {
-        "__scenes": {},
-        "createEventInfo": {
-          "step": "subscriptions",
-          "winners": "5",
-          "subscriptions": "@archer_club",
-          "endTime": null,
-          "description": "123"
-        }
+        "__scenes": {}
       }
     }
   ]

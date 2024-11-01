@@ -12,6 +12,7 @@ import { adminMainButtons, userMainButton } from "src/app.buttons";
 import { User } from "src/user/user.entity";
 import { EventStatus } from "src/enums/event.enum";
 import eventInfoMessage from "messages/event-info.message";
+import winnersMessage from "messages/winners-message";
 
 @Update()
 export class AdminUpdate {
@@ -126,7 +127,13 @@ export class AdminUpdate {
             eventId: string;
         }
 
-        const eventById = await this.eventRepository.findOne({ where: { id: +params.eventId } })
+        const eventById = await this.eventRepository
+        .createQueryBuilder('event')
+        .leftJoinAndSelect('event.users', 'user')
+        .where('event.id = :eventId', {eventId: +params.eventId})
+        .getOne();
+
+        console.log(eventById)
 
         ctx.answerCbQuery();
         ctx.reply(eventInfoMessage(eventById), { parse_mode: 'HTML', reply_markup: { inline_keyboard: eventControlButtons(eventById), } })
@@ -173,5 +180,49 @@ export class AdminUpdate {
             ctx.answerCbQuery();
             ctx.reply('Ивент был успешно удален')
         }
+    }
+
+    @Action(new RegExp(AdminCallbacks.FinalizeEvent))
+    async finalizeEvent(@Ctx() ctx: CustomContext) {
+        const params = callbackToObj(ctx.update.callback_query.data) as {
+            eventId: string;
+        }
+
+        const eventById = await this.eventRepository.findOne({where: {id: +params.eventId}})
+
+        const eventByIdsUsers = (await this.eventRepository
+        .createQueryBuilder('event')
+        .leftJoinAndSelect('event.users', 'user')
+        .where('event.id = :eventId', {eventId: +params.eventId})
+        .select('user.id')
+        .getRawMany())
+        .map(user => user.user_id);
+
+
+        const winnersCount = eventById.winners > eventByIdsUsers.length ?  eventByIdsUsers.length : eventById.winners
+
+        const randomWinners: User[] = []
+
+        while(randomWinners.length < winnersCount) {
+            const randomUser = eventByIdsUsers[Math.round(Math.random() * eventByIdsUsers.length)];
+
+            if(randomUser) {
+                const isStillHere = (await this.bot.telegram.getChatMember(eventById.subscriptions, randomUser)).status === 'member';
+
+                if(isStillHere) {
+                    const winner = await this.userRepository.findOne({where: {id: randomUser}});
+
+                    randomWinners.push(winner);
+                } else {
+                    continue;
+                }
+            } else {
+                continue;
+            }
+        }
+
+        this.bot.telegram.sendMessage(eventById.subscriptions, winnersMessage(randomWinners), {parse_mode: 'HTML'})
+
+        ctx.answerCbQuery();
     }
 }
